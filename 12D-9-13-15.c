@@ -51,6 +51,7 @@ void pre_auton()
 	// All activities that occur before the competition starts
 	// Example: clearing encoders, setting servo positions, ...
   lcdPreAuton();
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

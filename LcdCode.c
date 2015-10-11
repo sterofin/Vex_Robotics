@@ -10,6 +10,7 @@ int delayCount = 0;
 int count = 0;
 int delayer1 = 0;
 int autonCount = 0;
+bool lcdTerminate = false;
 bool ifRed = false;
 bool ifBlue = false;
 bool ifLeft = false;
@@ -36,48 +37,51 @@ void lcdPreAuton()
 	clearLCDLine(0);
 	clearLCDLine(1);
 	//Loop while center button is not pressed
-	while(nLCDButtons != centerButton)
+	while(lcdTerminate == false)
 	{
-		switch(colorCount)
+		while(nLCDButtons != centerButton)
 		{
-			case 0:
-				//Display first choice
-				displayLCDCenteredString(0, "Red");
-				displayLCDCenteredString(1, "<		 Enter		>");
-				waitForPress();
-				//Increment or decrement "count" based on button press
-				if(nLCDButtons == leftButton)
-				{
-					waitForRelease();
-					colorCount = 1;
-				}
-				else if(nLCDButtons == rightButton)
-				{
-					waitForRelease();
-					colorCount = 1;
-				}
-				ifRed = true;
-				break;
-			case 1:
-				//Display first choice
-				displayLCDCenteredString(0, "Blue");
-				displayLCDCenteredString(1, "<		 Enter		>");
-				waitForPress();
-				//Increment or decrement "count" based on button press
-				if(nLCDButtons == leftButton)
-				{
-					waitForRelease();
-					colorCount = 0;
-				}
-				else if(nLCDButtons == rightButton)
-				{
-					waitForRelease();
-					colorCount = 0;
-				}
-				ifBlue = true;
-				break;
+			switch(colorCount)
+			{
+				case 0:
+					//Display first choice
+					displayLCDCenteredString(0, "Red");
+					displayLCDCenteredString(1, "<		 Enter		>");
+					waitForPress();
+					//Increment or decrement "count" based on button press
+					if(nLCDButtons == leftButton)
+					{
+						waitForRelease();
+						colorCount = 1;
+					}
+					else if(nLCDButtons == rightButton)
+					{
+						waitForRelease();
+						colorCount = 1;
+					}
+					ifRed = true;
+					break;
+				case 1:
+					//Display first choice
+					displayLCDCenteredString(0, "Blue");
+					displayLCDCenteredString(1, "<		 Enter		>");
+					waitForPress();
+					//Increment or decrement "count" based on button press
+					if(nLCDButtons == leftButton)
+					{
+						waitForRelease();
+						colorCount = 0;
+					}
+					else if(nLCDButtons == rightButton)
+					{
+						waitForRelease();
+						colorCount = 0;
+					}
+					ifBlue = true;
+					break;
+			}
 		}
-		if(ifBlue == true && ifRed == false)
+		while(nLCDButtons != centerButton)
 		{
 			switch(sideCount)
 			{
@@ -111,52 +115,15 @@ void lcdPreAuton()
 					{
 						waitForRelease();
 						colorCount = 0;
-					}
-					autonCount = 1;
-					ifRight = true;
-					break;
+						}
+						autonCount = 1;
+						ifRight = true;
+						break;
+				}
 			}
 		}
-		else
+		while(nLCDButtons !=centerButton)
 		{
-			switch(sideCount)
-			{
-				case 0:
-					displayLCDCenteredString(0, "Left");
-					displayLCDCenteredString(1, "<		 Enter		>");
-					waitForPress();
-					if(nLCDButtons == leftButton)
-					{
-						waitForRelease();
-						sideCount = 1;
-					}
-					else if(nLCDButtons == rightButton)
-					{
-						waitForRelease();
-						sideCount = 1;
-					}
-					ifLeft = true;
-					autonCount = 3;
-					break;
-				case 1:
-					displayLCDCenteredString(0, "Right");
-					displayLCDCenteredString(1, "<		 Enter		>");
-					waitForPress();
-					if(nLCDButtons == leftButton)
-					{
-						waitForRelease();
-						sideCount = 0;
-					}
-					else if(nLCDButtons == rightButton)
-					{
-						waitForRelease();
-						sideCount = 0;
-					}
-					ifRight = true;
-					autonCount = 4;
-					break;
-			}
-		}
 		switch(delayCount){
 		case 0:
 			//Display first choice
@@ -167,12 +134,12 @@ void lcdPreAuton()
 			if(nLCDButtons == leftButton)
 			{
 				waitForRelease();
-				count = 3;
+				delayCount = 3;
 			}
 			else if(nLCDButtons == rightButton)
 			{
 				waitForRelease();
-				count++;
+				delayCount++;
 			}
 			delayer1 = 0;
 			break;
@@ -185,12 +152,12 @@ void lcdPreAuton()
 			if(nLCDButtons == leftButton)
 			{
 				waitForRelease();
-				count--;
+				delayCount--;
 			}
 			else if(nLCDButtons == rightButton)
 			{
 				waitForRelease();
-				count++;
+				delayCount++;
 			}
 			delayer1 = 3;
 			break;
@@ -203,12 +170,12 @@ void lcdPreAuton()
 			if(nLCDButtons == leftButton)
 			{
 				waitForRelease();
-				count--;
+				delayCount--;
 			}
 			else if(nLCDButtons == rightButton)
 			{
 				waitForRelease();
-				count++;
+				delayCount++;
 			}
 			delayer1 = 5;
 			break;
@@ -221,19 +188,20 @@ void lcdPreAuton()
 			if(nLCDButtons == leftButton)
 			{
 				waitForRelease();
-				count--;
+				delayCount--;
 			}
 			else if(nLCDButtons == rightButton)
 			{
 				waitForRelease();
-				count = 0;
+				delayCount = 0;
 			}
 			delayer1 = 7;
 			break;
 		default:
-			count = 0;
+			delayCount = 0;
 			break;
 		}
+		lcdTerminate = true;
 	}
 }
 //------------- End of User Interface Code ---------------------/
