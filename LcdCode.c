@@ -60,6 +60,7 @@ void lcdPreAuton()
 						colorCount = 1;
 					}
 					ifRed = true;
+					ifBlue = false;
 					break;
 				case 1:
 					//Display first choice
@@ -78,50 +79,97 @@ void lcdPreAuton()
 						colorCount = 0;
 					}
 					ifBlue = true;
+					ifRed = false;
 					break;
 			}
 		}
-		while(nLCDButtons != centerButton)
+		wait10Msec(10);
+		//next go to side selection
+		waitForRelease();
+		if(ifBlue == true && ifRed == false)
 		{
-			switch(sideCount)
+			while(nLCDButtons != centerButton)
 			{
-				case 0:
-					displayLCDCenteredString(0, "Left");
-					displayLCDCenteredString(1, "<		 Enter		>");
-					waitForPress();
-					if(nLCDButtons == leftButton)
-					{
-						waitForRelease();
-						colorCount = 1;
-					}
-					else if(nLCDButtons == rightButton)
-					{
-						waitForRelease();
-						colorCount = 1;
-					}
-					ifLeft = true;
-					autonCount = 0;
-					break;
-				case 1:
-					displayLCDCenteredString(0, "Right");
-					displayLCDCenteredString(1, "<		 Enter		>");
-					waitForPress();
-					if(nLCDButtons == leftButton)
-					{
-						waitForRelease();
-						colorCount = 0;
-					}
-					else if(nLCDButtons == rightButton)
-					{
-						waitForRelease();
-						colorCount = 0;
+				switch(sideCount)
+				{
+					case 0:
+						displayLCDCenteredString(0, "Left");
+						displayLCDCenteredString(1, "<		 Enter		>");
+						waitForPress();
+						if(nLCDButtons == leftButton)
+						{
+							waitForRelease();
+							sideCount = 1;
+						}
+						else if(nLCDButtons == rightButton)
+						{
+							waitForRelease();
+							sideCount = 1;
+						}
+						autonCount = 0;
+						break;
+					case 1:
+						displayLCDCenteredString(0, "Right");
+						displayLCDCenteredString(1, "<		 Enter		>");
+						waitForPress();
+						if(nLCDButtons == leftButton)
+						{
+							waitForRelease();
+							sideCount = 0;
+						}
+						else if(nLCDButtons == rightButton)
+						{
+							waitForRelease();
+							sideCount = 0;
 						}
 						autonCount = 1;
-						ifRight = true;
 						break;
 				}
 			}
 		}
+		else if(ifBlue == false && ifRed == true)
+		{
+			while(nLCDButtons != centerButton)
+			{
+				switch(sideCount)
+				{
+					case 0:
+						displayLCDCenteredString(0, "Left");
+						displayLCDCenteredString(1, "<		 Enter		>");
+						waitForPress();
+						if(nLCDButtons == leftButton)
+						{
+							waitForRelease();
+							sideCount = 1;
+						}
+						else if(nLCDButtons == rightButton)
+						{
+							waitForRelease();
+							sideCount = 1;
+						}
+						autonCount = 2;
+						break;
+					case 1:
+						displayLCDCenteredString(0, "Right");
+						displayLCDCenteredString(1, "<		 Enter		>");
+						waitForPress();
+						if(nLCDButtons == leftButton)
+						{
+							waitForRelease();
+							sideCount = 0;
+						}
+						else if(nLCDButtons == rightButton)
+						{
+							waitForRelease();
+							sideCount = 0;
+						}
+						autonCount = 3;
+						break;
+				}
+			}
+		}
+		wait10Msec(10);
+		waitForRelease();
 		while(nLCDButtons !=centerButton)
 		{
 		switch(delayCount){
@@ -203,6 +251,7 @@ void lcdPreAuton()
 		}
 		lcdTerminate = true;
 	}
+}
 }
 //------------- End of User Interface Code ---------------------/
 
