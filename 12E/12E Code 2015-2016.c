@@ -12,6 +12,7 @@
 #include "AutonomousDirectory-12E.c";
 #include "MovementDirectory-12E.c";
 #include "LcdCode-12E.c";
+#include "SmartMotorLib.c";
 
 //Competition Control and Duration Settings
 #pragma competitionControl(Competition)
@@ -44,9 +45,9 @@ void pre_auton()
   // Set bStopTasksBetweenModes to false if you want to keep user created tasks running between
   // Autonomous and Tele-Op modes. You will need to manage all user created tasks if set to false.
   bStopTasksBetweenModes = true;
-
-	// All activities that occur before the competition starts
-	// Example: clearing encoders, setting servo positions, ...
+  SmartMotorsInit();
+  SmartMotorPtcMonitorEnable();
+  SmartMotorCurrentMonitorEnable();
   lcdPreAuton();
 }
 
@@ -79,7 +80,7 @@ task autonomous()
 task usercontrol()
 {
 	// User control code here, inside the loop
-
+	SmartMotorRun();
 	while (true)
 	{
 		//Create "deadzone" for Y1/Ch3

@@ -32,6 +32,8 @@ void waitForRelease()
 
 void lcdPreAuton()
 {
+	//Enable backlight
+	bLCDBacklight = true;
 	//Clear LCD
 	clearLCDLine(0);
 	clearLCDLine(1);
