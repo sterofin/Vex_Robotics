@@ -107,7 +107,7 @@ task usercontrol()
 		//Launcher Code
 		if(vexRT[Btn8DXmtr2] == 1)
 		{
-			Outspeed(70);
+			Outspeed(90);
 			pressed = true;
 		}
 		else
