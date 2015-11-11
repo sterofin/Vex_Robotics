@@ -39,6 +39,12 @@ void blueLeft(int delayer)
 	Inspeed(0);
 	Outspeed(0);
 
+	//wait1Msec(delayer*1000);
+	//while(nMotorEncoder[Lbackwheel] /= 10000 )
+	//{
+	//	move(90);
+	//}
+
 }
 
 void blueRight(int delayer)

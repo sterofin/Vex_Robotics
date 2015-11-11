@@ -1,9 +1,9 @@
-#pragma config(Motor,  port1,           Lbackwheel,    tmotorVex393_HBridge, openLoop, reversed)
+#pragma config(Motor,  port1,           Lbackwheel,    tmotorVex393_HBridge, openLoop)
 #pragma config(Motor,  port2,           Lfrontwheel,   tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           LIntake,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port4,           Louttake,      tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port5,           Leftmidwheel,  tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port6,           Rightmidwheel, tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port5,           Lmidwheel,     tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port6,           Rmidwheel,     tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port7,           Routtake,      tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           Rintake,       tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port9,           Rfrontwheel,   tmotorVex393_MC29, openLoop, reversed)
@@ -103,10 +103,22 @@ task usercontrol()
 			X2 = 0;
 
 		//Remote Control Commands
-		motor[Rfrontwheel] = Y1 - X2 - X1;
+		motor[Rfrontwheel] = Y1 + X2 - X1;
 		motor[Rbackwheel] =  Y1 - X2 + X1;
-		motor[Lfrontwheel] = Y1 + X2 + X1;
-		motor[Lbackwheel] =  Y1 + X2 - X1;
+		motor[Lfrontwheel] = Y1 + X2 - X1;
+		motor[Lbackwheel] =  Y1 - X2 + X1;
+		/*while(vexRT(Ch3) > 15 || vexRT(Ch3) < -15)
+		{
+			motor[Lmidwheel] = vexRT(Ch3);
+		  motor[Rmidwheel] = vexRT(Ch3);
+	  }
+	  while(vexRT(Ch1) > 15 || vexRT(Ch1) < -15)
+	  {
+			motor[Lmidwheel] = vexRT(Ch1);
+			motor[Rmidwheel] = -vexRT(Ch1);
+	  }*/
+	  motor[Lmidwheel] = Y1 + X2;
+	  motor[Rmidwheel] = Y1 - X2;
 		//Launcher Code
 		if(vexRT[Btn8DXmtr2] == 1)
 		{
