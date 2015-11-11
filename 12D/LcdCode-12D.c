@@ -32,13 +32,15 @@ void waitForRelease()
 
 void lcdPreAuton()
 {
+	//Enable backlight
+	bLCDBacklight = true;
 	//Clear LCD
 	clearLCDLine(0);
 	clearLCDLine(1);
 	//Loop while center button is not pressed
 	while(lcdTerminate == false)
 	{
-		while(nLCDButtons != centerButton)
+		while(nLCDButtons != centerButton && Btn8U != 1)
 		{
 			switch(colorCount)
 			{

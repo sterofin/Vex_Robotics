@@ -2,6 +2,8 @@
 #pragma config(Motor,  port2,           Lfrontwheel,   tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           LIntake,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port4,           Louttake,      tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port5,           Leftmidwheel,  tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port6,           Rightmidwheel, tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port7,           Routtake,      tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           Rintake,       tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port9,           Rfrontwheel,   tmotorVex393_MC29, openLoop, reversed)
@@ -65,6 +67,7 @@ task autonomous()
   // .....................................................................................
   // Insert user code here.
   // .....................................................................................
+	SmartMotorRun();
 	lcdAuton();
 }
 
