@@ -1,5 +1,5 @@
-#include "MovementDirectory-12D.c";
-
+#include "MovementDirectory-12D.c" ;
+//#include "EncoderDirectory-12D.c" ;
 
 void blueLeft(int delayer)
 {
@@ -38,12 +38,9 @@ void blueLeft(int delayer)
 	wait1Msec(500);
 	Inspeed(0);
 	Outspeed(0);
+	//encoderMove( 90 , 24 ) ;
 
-	//wait1Msec(delayer*1000);
-	//while(nMotorEncoder[Lbackwheel] /= 10000 )
-	//{
-	//	move(90);
-	//}
+
 
 }
 
@@ -92,7 +89,7 @@ void redLeft(int delayer)
 	move(100); // move forward for 2.5 secs
 	wait1Msec(2500);
 	move(20); // move slower for 1.5 secs
-	Outspeed(65); // start the outtake
+	Outspeed(59); // start the outtake
 	wait1Msec(1500);
 	move(0); // stop
 	wait1Msec(500); // wait half a second
@@ -100,7 +97,7 @@ void redLeft(int delayer)
 	wait1Msec(250);
 	move(0); // stop moving
 	wait1Msec(250); // wait  quarter of a second
-	strafeRight(100); // strafe right for .75 seconds
+	strafeRight(100); // strafe right for 0.75 seconds
 	wait1Msec(750);
 	strafeRight(0); // stop strafing
 	Inspeed(127); // start the intake
@@ -127,7 +124,7 @@ void redRight(int delayer)
 	move(100); // move forward for 2.5 secs
 	wait1Msec(2500);
 	move(20); // move slower for 1.5 secs
-	Outspeed(65); // start the outtake
+	Outspeed(60); // start the outtake
 	wait1Msec(1500);
 	move(0); // stop
 	wait1Msec(500); // wait half a second
@@ -135,8 +132,8 @@ void redRight(int delayer)
 	wait1Msec(250);
 	move(0); // stop moving
 	wait1Msec(250); // wait  quarter of a second
-	strafeLeft(100); // strafe right for .75 seconds
-	wait1Msec(750);
+	strafeLeft(100); // strafe right for 1.25 seconds
+	wait1Msec(50);
 	strafeLeft(0); // stop strafing
 	move(-40);
 	wait1Msec(250);
